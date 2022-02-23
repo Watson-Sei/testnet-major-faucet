@@ -1,8 +1,57 @@
+/* eslint-disable node/no-extraneous-import */
 /* eslint-disable prettier/prettier */
 /* eslint-disable node/no-missing-import */
 import { Header } from "./components/header";
+import { ethers } from "ethers";
+import {
+  abi as FAUCET_ABI
+} from "./contracts/Faucet/Faucet.json";
+
+interface Window {
+  ethereum: any;
+}
+
+declare const window: Window;
 
 export const App = () => {
+
+  const isMetaMaskInstalled = () => {
+    const {ethereum} = window;
+    if (!ethereum) {
+      return { isInstalled: false, returnProvider: null };
+    }
+    if (!ethereum.isMetaMask) {
+      return { isInstalled: false, returnProvider: null };
+    }
+    if (ethereum.isMetaMask && !ethereum.providers) {
+      return { isInstalled: true, returnProvider: ethereum };
+    }
+    if (ethereum.isMetaMask && ethereum.providers) {
+      const provider = ethereum.providers.find((provider: { isMetaMask: any}) => provider.isMetaMask);
+      return { isInstalled: true, returnProvider: provider };
+    }
+    return { isInstalled: false, returnProvider: null };
+  }
+
+  const RequestFaucet = async (address: string) => {
+    const {isInstalled, returnProvider} = isMetaMaskInstalled();
+    if (!isInstalled) {
+      console.log('Please Install MetaMask');
+    }
+    try {
+      const provider = new ethers.providers.Web3Provider(returnProvider);
+      const signer = provider.getSigner(0);
+      const Faucet = new ethers.Contract(address, FAUCET_ABI, signer);
+      await Faucet.multipleSend();
+      console.log("Finish")
+    } catch (error: any) {
+      if (error.code === 4001) {
+        console.log('User rejected request');
+      }
+      console.error(error);
+    }
+  }
+
   return (
     <>
       <Header />
@@ -151,7 +200,7 @@ export const App = () => {
                       </tbody>
                     </table>
                     <div className="m-4">
-                        <button className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                        <button onClick={() => RequestFaucet("0x899b767339F4bbCCafF19D1afE880065f8aC73dF")} className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                             Submit
                         </button>
                     </div>
