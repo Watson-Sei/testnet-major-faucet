@@ -52,6 +52,30 @@ export const App = () => {
     }
   }
 
+  const RequestAddToken = async (address: string, symbol: string, decimals: number) => {
+    const {isInstalled, returnProvider} = isMetaMaskInstalled();
+    if (!isInstalled) {
+      console.log('Please Install MetaMask');
+    }
+    await returnProvider.request({
+      method: 'wallet_watchAsset',
+      params: {
+        type: "ERC20",
+        options: {
+          address: address,
+          symbol: symbol,
+          decimals: decimals,
+        }
+      }
+    })
+    .then((success: any) => {
+      if (success) {
+        console.log('successfully added to wallet!')
+      }
+    })
+    .catch(console.error)
+  }
+
   return (
     <>
       <Header />
@@ -176,26 +200,31 @@ export const App = () => {
                     <table className="table-fixed break-words break-all">
                       <thead>
                         <tr>
-                          <th className="px-4 py-2 text-xs">Symbol</th>
-                          <th className="px-4 py-2 text-xs">Contract Address</th>
+                          <th className="px-1 py-1 text-xs">Symbol</th>
+                          <th className="px-1 py-1 text-xs">Contract Address</th>
+                          <th className="px-1 py-1 text-xs whitespace-nowrap">Add</th>
                         </tr>
                       </thead>
                       <tbody>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">WETH</td>
-                              <td className="border px-4 py-2">0xB3B3cdD7D73E8699692d7f76F92E3632132ffC93</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">WETH</td>
+                              <td className="border px-1 py-1">0xB3B3cdD7D73E8699692d7f76F92E3632132ffC93</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0xB3B3cdD7D73E8699692d7f76F92E3632132ffC93", "WETH", 18)}>🦊</td>
                           </tr>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">USDC</td>
-                              <td className="border px-4 py-2">0x98D16468cEbd24370E9028Cef05d45d21b577d42</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">USDC</td>
+                              <td className="border px-1 py-1">0x98D16468cEbd24370E9028Cef05d45d21b577d42</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0x98D16468cEbd24370E9028Cef05d45d21b577d42", "USDC", 18)}>🦊</td>
                           </tr>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">JPYC</td>
-                              <td className="border px-4 py-2">0x65A22C33a664b8e5Bf8D13528E9ce445225c11FF</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">JPYC</td>
+                              <td className="border px-1 py-1">0x65A22C33a664b8e5Bf8D13528E9ce445225c11FF</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0x65A22C33a664b8e5Bf8D13528E9ce445225c11FF", "JPYC", 18)}>🦊</td>
                           </tr>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">DAI</td>
-                              <td className="border px-4 py-2">0x89AB110B1eCa0225F4Dfd19492D8c475fFf31585</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">DAI</td>
+                              <td className="border px-1 py-1">0x89AB110B1eCa0225F4Dfd19492D8c475fFf31585</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0x89AB110B1eCa0225F4Dfd19492D8c475fFf31585", "DAI", 18)}>🦊</td>
                           </tr>
                       </tbody>
                     </table>
