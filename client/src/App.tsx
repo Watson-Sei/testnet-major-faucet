@@ -33,23 +33,27 @@ export const App = () => {
     return { isInstalled: false, returnProvider: null };
   }
 
-  const RequestFaucet = async (address: string) => {
+  const ConnetWallet = async (address: string) => {
     const {isInstalled, returnProvider} = isMetaMaskInstalled();
     if (!isInstalled) {
       console.log('Please Install MetaMask');
     }
-    try {
-      const provider = new ethers.providers.Web3Provider(returnProvider);
-      const signer = provider.getSigner(0);
-      const Faucet = new ethers.Contract(address, FAUCET_ABI, signer);
-      await Faucet.multipleSend();
-      console.log("Finish")
-    } catch (error: any) {
-      if (error.code === 4001) {
-        console.log('User rejected request');
-      }
-      console.error(error);
-    }
+    await returnProvider.request({ method: 'eth_requestAccounts' })
+        .then(RequestFaucet(address, returnProvider))
+        .catch((error: any) => {
+          if (error.code === 4001) {
+            console.log('User rejected request')
+          }
+          console.error(error);
+        })
+  }
+
+  const RequestFaucet = async (address: string, ethereum: any) => {
+    const provider = new ethers.providers.Web3Provider(ethereum);
+    const signer = provider.getSigner();
+    const Faucet = new ethers.Contract(address, FAUCET_ABI, signer);
+    await Faucet.multipleSend();
+    console.log("Finish");
   }
 
   const RequestAddToken = async (address: string, symbol: string, decimals: number) => {
@@ -229,7 +233,7 @@ export const App = () => {
                       </tbody>
                     </table>
                     <div className="m-4">
-                        <button onClick={() => RequestFaucet("0x899b767339F4bbCCafF19D1afE880065f8aC73dF")} className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                        <button onClick={() => ConnetWallet("0x899b767339F4bbCCafF19D1afE880065f8aC73dF")} className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                             Submit
                         </button>
                     </div>
