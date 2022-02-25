@@ -154,7 +154,7 @@ export const App = () => {
                 </li>
               </ul>
               <div className="tab-content" id="tabs-tabContent">
-                <div
+              <div
                   className="tab-pane fade show active"
                   id="tabs-rinkeby"
                   role="tabpanel"
@@ -164,31 +164,36 @@ export const App = () => {
                     <table className="table-fixed break-words break-all">
                       <thead>
                         <tr>
-                          <th className="px-4 py-2 text-xs">Symbol</th>
-                          <th className="px-4 py-2 text-xs">Contract Address</th>
+                          <th className="px-1 py-1 text-xs">Symbol</th>
+                          <th className="px-1 py-1 text-xs">Contract Address</th>
+                          <th className="px-1 py-1 text-xs whitespace-nowrap">Add</th>
                         </tr>
                       </thead>
                       <tbody>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">WETH</td>
-                              <td className="border px-4 py-2">x0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">WETH</td>
+                              <td className="border px-1 py-1">0x292Ae90F62f862eF76F98aeA432590B800104E26</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0x292Ae90F62f862eF76F98aeA432590B800104E26", "WETH", 18)}>🦊</td>
                           </tr>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">USDC</td>
-                              <td className="border px-4 py-2">x0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">USDC</td>
+                              <td className="border px-1 py-1">0x9343e348fB977ca44b66b9b4ACf3A33E85558b92</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0x9343e348fB977ca44b66b9b4ACf3A33E85558b92", "USDC", 18)}>🦊</td>
                           </tr>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">JPYC</td>
-                              <td className="border px-4 py-2">x0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">JPYC</td>
+                              <td className="border px-1 py-1">0xCC4886b573ADdb5e29D37a728005701c72A03ed6</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0xCC4886b573ADdb5e29D37a728005701c72A03ed6", "JPYC", 18)}>🦊</td>
                           </tr>
                           <tr>
-                              <td className="border px-4 py-2 whitespace-nowrap">DAI</td>
-                              <td className="border px-4 py-2">x0xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</td>
+                              <td className="border px-1 py-1 whitespace-nowrap">DAI</td>
+                              <td className="border px-1 py-1">0xC83075E9D2D194521E82ea649D5a5ab9BF0ebC5b</td>
+                              <td className="border px-1 py-1 cursor-pointer" onClick={() => RequestAddToken("0xC83075E9D2D194521E82ea649D5a5ab9BF0ebC5b", "DAI", 18)}>🦊</td>
                           </tr>
                       </tbody>
                     </table>
                     <div className="m-4">
-                        <button className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+                        <button onClick={() => ConnetWallet("0x5e349EBa6f5F9C89BE1a733992c18FCe264c24bF")} className="w-full bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
                             Submit
                         </button>
                     </div>
