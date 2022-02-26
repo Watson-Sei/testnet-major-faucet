@@ -35,6 +35,21 @@ ReactDOM.render(
           property="og:image"
           content="https://1.bp.blogspot.com/-Z5C0RZ6fQoY/VozfYEKr1GI/AAAAAAAA2kY/JGt6e1_y7QA/s400/mizu_suidou_stop.png"
         />
+        <meta property="twitter:card" content="summary" />
+        <meta property="twitter:site" content="@watson_sei" />
+        <meta
+          property="twitter:url"
+          content="https://testnet-major-faucet.vercel.app/"
+        />
+        <meta property="twitter:title" content="Testnet Major Faucet" />
+        <meta
+          property="twitter:description"
+          content="このFaucetは、Stdoneサービスのテストネット版で利用する通貨を一時的に送信します。"
+        />
+        <meta
+          property="twitter:image"
+          content="https://1.bp.blogspot.com/-Z5C0RZ6fQoY/VozfYEKr1GI/AAAAAAAA2kY/JGt6e1_y7QA/s400/mizu_suidou_stop.png"
+        />
       </Helmet>
       <App />
     </HelmetProvider>
