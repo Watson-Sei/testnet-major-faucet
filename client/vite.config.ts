@@ -1,4 +1,3 @@
-/* eslint-disable node/no-path-concat */
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 
@@ -13,9 +12,4 @@ export default defineConfig({
     emptyOutDir: true,
   },
   plugins: [react()],
-  resolve: {
-    alias: {
-      "~/": `${__dirname}/src/`,
-    },
-  },
 });

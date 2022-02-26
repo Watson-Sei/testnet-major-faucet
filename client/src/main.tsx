@@ -6,7 +6,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "tailwindcss/tailwind.css";
 import "tw-elements";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async";
 import { App } from "./App";
 
 ReactDOM.render(
